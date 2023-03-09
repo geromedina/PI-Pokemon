@@ -59,14 +59,14 @@ export default function Home() {
                         <div className={styles.content_select}>
                             <select onChange={handleSort}>
                                 <option value="filtro"> A-Z:</option>
-                                <option value="asc">Ascendente</option>
-                                <option value="desc">Descendente</option>
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
                             </select>
                             <i></i>
                         </div>
                         <div className={styles.content_select}>
                             <select onChange={handleFilterType}>
-                                <option value="type"> Tipo </option>
+                                <option value="type"> Types </option>
                                 <option value="normal"> Normal </option>
                                 <option value="flying"> Flying </option>
                                 <option value="poison"> Poison </option>
@@ -82,9 +82,9 @@ export default function Home() {
                         </div>
                         <div className={styles.content_select}>
                             <select onChange={handleFilterCreated}>
-                                <option value="Todos"> Todos </option>
-                                <option value="Creados"> Creados </option>
-                                <option value="Existentes"> Existentes </option>
+                                <option value="Todos"> All </option>
+                                <option value="Creados"> Created </option>
+                                <option value="Existentes"> Existent </option>
                             </select>
                             <i></i>
                         </div>

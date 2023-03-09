@@ -21,9 +21,6 @@ export default function NavBar(){
                             <li>
                                 <Link to="/pokemons">Create</Link>
                             </li>
-                            <li>
-                                <Link to="/about">About</Link>
-                            </li>
                         </ul>
                     </div>
                 </div>
