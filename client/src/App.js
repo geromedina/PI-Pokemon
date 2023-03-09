@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './Views/LandingPage/LandingPage';
 import Home from './Views/Home/Home';
 import Details from './Views/Details/Details';
-import Create from './Views/Create/Create';
+import PokemonCreate from './Views/PokemonCreate/PokemonCreate';
 import About from './Views/About/About';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react'
@@ -23,9 +23,9 @@ function App() {
     <BrowserRouter>
       <Routes>  
         <Route exact path="/" element={<LandingPage />} />
-        <Route path="/pokemons" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route exact path="/pokemons/:id" element={<Details />} />
-        <Route exact path="/create" element={<Create />} />
+        <Route exact path="/pokemons" element={<PokemonCreate />} />
         <Route exact path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

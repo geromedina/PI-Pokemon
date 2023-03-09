@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import './LandingPage.css'
+import styles from './LandingPage.module.css'
 
 export default function LandingPage() {
 
@@ -12,13 +12,13 @@ export default function LandingPage() {
 //    },[])
     
     return(
-        <div className='landing'>
+        <div className={styles.landing}>
             <div>
-                <h1 className='landing_title'>Welcome to Henry's Pokemon App</h1>
-                <span className='landing_text'>Discover the feactures of your favorite pokemons</span>
+                <h1 className={styles.landing_title}>Welcome to Henry's Pokemon App</h1>
+                <span className={styles.landing_text}>Discover the feactures of your favorite pokemons</span>
             </div>
-            <Link to = '/pokemons'>
-                <button className='start_button'>Start</button>
+            <Link to = '/home'>
+                <button className={styles.start_button}>Start</button>
             </Link>
         </div>
     )

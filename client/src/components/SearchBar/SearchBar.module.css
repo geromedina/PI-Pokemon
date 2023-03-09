@@ -1,0 +1,45 @@
+.search_bar {
+    font-family: "vt323", monospace;
+    font-size: 1rem;
+    background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+    background-color:#ffc477;
+    border-radius:6px;
+    display:inline-block;
+    padding:4px 10px;
+}
+
+.search_input {
+    border: #cc9f52 2px solid;
+    border-radius:6px;
+    padding:4px 10px;
+    background-color: #ffc477;
+    font-family: "vt323", monospace;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+.search_button {
+
+    font-family: "vt323", monospace;
+    font-size: 1rem;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #cc9f52;
+  
+    box-shadow:inset 0px 1px 0px 0px #fce2c1;
+    background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+    background-color:#ffc477;
+    border-radius:6px;
+    border:1px solid #eeb44f;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff; 
+    padding:4px 10px;
+  
+  }
+
+  .search_button:hover {
+    background:linear-gradient(to bottom, #fb9e25 5%, #ffc477 100%);
+    background-color:#fb9e25;
+  }

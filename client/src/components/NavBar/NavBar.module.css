@@ -9,6 +9,7 @@
 }
 
 .nav_conteiner {
+
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -60,7 +61,7 @@
 .menu {
 	display: flex;
 	justify-content: center;
-	background: #FFF712;
+	background: #ffb812;
 	color: #FFF;
 	padding-left: 18px;
     padding-right: 18px;
@@ -92,7 +93,7 @@
 	text-decoration: none;
     font-family: 'VT323', monospace;
 	font-weight: bold;
-	color: #D10A18;
+	color: #ffffff;
 	font-size: 18px;
 	display: flex;
     flex-direction: column;

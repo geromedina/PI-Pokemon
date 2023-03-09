@@ -5,7 +5,7 @@ import { filterPokemonsByType, filterPokemonsCreated, getPokemons, orderByName }
 import NavBar from "../../components/NavBar/NavBar"
 import Card from "../../components/Card/Card"
 import Paginated from '../../components/Paginated/Paginated';
-import './Home.css'
+import styles from "./Home.module.css"
 
 
 export default function Home() {
@@ -50,52 +50,67 @@ export default function Home() {
     }
 
     return (
-        <div >
+        <div>
             <NavBar />
-            <button onClick={e => {handleClick(e)}}>Reload Pokemons</button>
-            <div className="home">
-                <div>
-                    <select onChange={handleSort}>
-                        <option value="filtro"> A-Z:</option>
-                        <option value="asc">Ascendente</option>
-                        <option value="desc">Descendente</option>
-                    </select>
-                    <select onChange={handleFilterType}>
-                        <option value="type"> Tipo </option>
-                        <option value="normal"> Normal </option>
-                        <option value="flying"> Flying </option>
-                        <option value="poison"> Poison </option>
-                        <option value="ground"> Ground </option>
-                        <option value="bug"> Bug </option>
-                        <option value="fire"> Fire </option>
-                        <option value="water"> Water </option>
-                        <option value="grass"> Grass </option>
-                        <option value="electric"> Electric </option>
-                        <option value="fairy"> Fairy </option>
-                    </select>
-                    <select onChange={handleFilterCreated}>
-                        <option value="Todos"> Todos </option>
-                        <option value="Creados"> Creados </option>
-                        <option value="Existentes"> Existentes </option>
-                    </select>
-                    <Paginated 
-                    pokemonsPerPage={pokemonsPerPage}
-                    allPokemons={allPokemons.length}
-                    paginado={paginado}
-                    />
+            <div className={styles.main_cointainer}>
+                <button onClick={e => {handleClick(e)}} className={styles.reload_button}>Reload Pokemons</button>
+                <div className={styles.main_cointainer}>
+                    <div className={styles.filters_container}>
+                        <div className={styles.content_select}>
+                            <select onChange={handleSort}>
+                                <option value="filtro"> A-Z:</option>
+                                <option value="asc">Ascendente</option>
+                                <option value="desc">Descendente</option>
+                            </select>
+                            <i></i>
+                        </div>
+                        <div className={styles.content_select}>
+                            <select onChange={handleFilterType}>
+                                <option value="type"> Tipo </option>
+                                <option value="normal"> Normal </option>
+                                <option value="flying"> Flying </option>
+                                <option value="poison"> Poison </option>
+                                <option value="ground"> Ground </option>
+                                <option value="bug"> Bug </option>
+                                <option value="fire"> Fire </option>
+                                <option value="water"> Water </option>
+                                <option value="grass"> Grass </option>
+                                <option value="electric"> Electric </option>
+                                <option value="fairy"> Fairy </option>
+                            </select>
+                            <i></i>
+                        </div>
+                        <div className={styles.content_select}>
+                            <select onChange={handleFilterCreated}>
+                                <option value="Todos"> Todos </option>
+                                <option value="Creados"> Creados </option>
+                                <option value="Existentes"> Existentes </option>
+                            </select>
+                            <i></i>
+                        </div>
+                    </div>
+                    <div className={styles.pokemon_container}>
+                        {
+                            allPokemons && currentPokemons.map((el) => {
+                                return (
+                                    <Card 
+                                    name={el.name}
+                                    image={el.image}
+                                    types= {el.types}
+                                    attack={el.attack}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                    <div className={styles.pagination_container}>
+                        <Paginated 
+                            pokemonsPerPage={pokemonsPerPage}
+                            allPokemons={allPokemons.length}
+                            paginado={paginado}
+                        />
+                    </div>
                 </div>
-                {
-                    allPokemons && currentPokemons.map((el) => {
-                        return (
-                            <Card 
-                            name={el.name}
-                            image={el.image}
-                            types= {el.types}
-                            attack={el.attack}
-                            />
-                        )
-                    })
-                }
             </div>
         </div>
     );

@@ -1,10 +1,11 @@
 import NavBar from "../../components/NavBar/NavBar"
+import styles from "./About.module.css"
 
 export default function About(){
     return(
         <div>
             <NavBar />
-            <h1>Estoy en About</h1>
+            <p>About</p>
         </div>
     )
 }
