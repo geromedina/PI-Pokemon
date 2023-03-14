@@ -1,33 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postPokemon, getTypes } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { postPokemon, getTypes } from '../../actions';
 import NavBar from "../../components/NavBar/NavBar"
 import styles from "./PokemonCreate.module.css"
 
 
-function validate(pokemon){
+function validate(input){
     let errors = {};
-    if (!pokemon.name) {
-        errors.name = 'Name is required.'
-    } else if (!pokemon.attack) {
-        errors.attack = 'Attack is required.'
+    if (!input.name) {
+        errors.name = 'Name is required.';
+    } 
+    
+    if (!input.image) {
+        errors.image = 'Image is required';
     }
 
+    if (!input.hp) {
+        errors.hp = 'HP is required';
+    }
+
+    if (!input.attack) {
+        errors.attack = 'Attack is required';
+    }
+
+    if (input.types.length <= 0) {
+        errors.types = 'At least one type is required';
+    }
     return errors;
 }
 
 
 export default function PokemonCreate(){
-
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const types = useSelector((state) => state.types)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const types = useSelector((state) => state.types);
+    
     const [ errors, setErrors ] = useState({});
 
-    const [ pokemon, setPokemon ] = useState({
+    const [ pokemon, setPokemon] = useState({
         name: "",
-        types: [],
         image: "",
         hp: 0,
         attack: 0,
@@ -35,25 +48,30 @@ export default function PokemonCreate(){
         speed: 0,
         height: 0,
         weight: 0,
-    })
+        types: [],
+    });
+
+    useEffect(() => {
+        dispatch(getTypes());
+    },[])
 
     function handleChange(e) {
         e.preventDefault();
         setPokemon({
             ...pokemon,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
         setErrors(validate({
             ...pokemon,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         }));
     }
 
     function handleSelect(e){
         setPokemon({
             ...pokemon,
-            types: [...pokemon.types, e.target.value]
-        })
+            types: [...pokemon.types, e.target.value],
+        });
     }
 
     function handleSubmit(e){
@@ -63,7 +81,6 @@ export default function PokemonCreate(){
         alert("Pokemon successfully created!")
         setPokemon({
             name: "",
-            types: [],
             image: "",
             hp: 0,
             attack: 0,
@@ -71,8 +88,9 @@ export default function PokemonCreate(){
             speed: 0,
             height: 0,
             weight: 0,    
+            types: [],
         })
-        navigate("/pokemons")
+        navigate("/home")
     }
 
     function handleDelete(el){
@@ -81,10 +99,6 @@ export default function PokemonCreate(){
             types: pokemon.types.filter( t => t !== el)
         })
     }
-
-    useEffect(() => {
-        dispatch(getTypes())
-    }, [])
 
     return(
         <div>
@@ -96,12 +110,13 @@ export default function PokemonCreate(){
                     <div>
                         <label for="name">Name: </label>
                         <input 
+                        onChange={handleChange}
+                        id="name"
+                        name="name"
                         type="text"
                         value={pokemon.name}
-                        name="name"
                         className='input'
-                        onChange={handleChange}
-                        />
+                        />{" "}
                         {
                             errors.name && ( <p className="error">{errors.name}</p> )
                         }
@@ -110,78 +125,80 @@ export default function PokemonCreate(){
                     <div>
                         <label htmlFor="">Image: </label>
                         <input 
-                        type="text"
+                        onChange={handleChange} 
                         name="image"
+                        type="text"
                         value={pokemon.image}
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        />{" "}
                     </div>
 
                     <div>
+                        {" "}
                         <label htmlFor="">HP: </label>
                         <input 
+                        onChange={handleChange} 
+                        name="hp"
                         type="number"
                         value={pokemon.hp}
-                        name="hp"
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        />{" "}
                     </div>    
 
                     <div>
                         <label htmlFor="">Attack: </label>
                         <input 
+                        onChange={handleChange} 
+                        name="attack"
                         type="number"
                         value={pokemon.attack}
-                        name="attack"
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        /> {" "}
                     </div>
 
                     <div>
                         <label htmlFor="">Defense: </label>
                         <input 
+                        onChange={handleChange} 
+                        name="defense"
                         type="number"
                         value={pokemon.defense}
-                        name="defense"
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        /> {" "}
                     </div>
 
                     <div>
                         <label htmlFor="">Speed: </label>
                         <input 
+                        onChange={handleChange} 
+                        name="speed"
                         type="number"
                         value={pokemon.speed}
-                        name="speed"
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        /> {" "}
                     </div>   
 
                     <div>
+                        {" "}
                         <label htmlFor="">Height: </label>
                         <input 
+                        onChange={handleChange} 
+                        name="height"
                         type="number"
                         value={pokemon.height}
-                        name="height"
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        /> {" "}
                     </div>
 
                     <div>
                         <label htmlFor="">Weight: </label>
                         <input 
+                        onChange={handleChange} 
+                        name="weight"
                         type="number"
                         value={pokemon.weight}
-                        name="weight"
                         className="input"
-                        onChange={handleChange} 
-                        />
+                        /> {" "}
                     </div>
 
                     <div>
