@@ -91,9 +91,9 @@ export default function Home() {
                     </div>
                     <div className={styles.pokemon_container}>
                         {
-                            allPokemons && currentPokemons.map((el) => {
+                            allPokemons && currentPokemons.map((el, i) => {
                                 return (
-                                    <Link to={"/home/" + el.id}>
+                                    <Link to={"/home/" + el.id} key={i}>
                                         <Card 
                                         name={el.name}
                                         image={el.image}
