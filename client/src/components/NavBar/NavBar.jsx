@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from '../../pictures/pokeball.png'
 import pokemon from '../../pictures/pokemon_logo.png'
-import SearchBar from "../SearchBar/SearchBar";
 import styles from "./NavBar.module.css"
 
 
@@ -23,9 +22,6 @@ export default function NavBar(){
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div>
-                    <SearchBar/>
                 </div>
                 <div className={styles.nav_right_side}>
                     <img src={pokemon} alt="Pokemon Logo" className={styles.pokemon}/>

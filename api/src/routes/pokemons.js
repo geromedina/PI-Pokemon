@@ -5,30 +5,26 @@ const { Pokemon, Type } = require("../db")
 const router = Router();
 
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     try {
-        const { name } = req.query;
-        if (name) {
-            // Primero busco en la api externa
-            let pokemonSearch = await getPokemonApiByName(name);
 
-            if(pokemonSearch.error) {
-                pokemonSearch = await getPokemonsDbByName(name);
+      let name = req.query.name;
 
-                if (!pokemonSearch) {
-                    return res.status(404).json({"message": "Pokemon not found"})
-                }
-            }
-            return res.status(200).json(pokemonSearch);
-        }
-
-        // Si no pasamos name, retorno todos los pokemons..
-        const allPokemons = await getAllPokemons();
-        return res.status(200).json(allPokemons);
-    } catch(error) {
-        next(error);
+      let pokemonsTotal = await getAllPokemons();
+      if (name) {
+        let pokemonName = await pokemonsTotal.filter((el) => 
+          el.name.toLowerCase().includes(name.toLowerCase())
+        );
+        pokemonName.length
+          ? res.status(200).send(pokemonName)
+          : res.status(404).send("The entered pokemon does not exist");
+      } else {
+        res.status(200).send(pokemonsTotal);
+      }
+    } catch (error) {
+      next(error);
     }
-});
+  });
 
 
 router.get('/:idPokemon', async (req, res, next) => {

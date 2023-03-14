@@ -23,21 +23,21 @@ export function getTypes(){
 export function filterPokemonsByType(payload){
     return {
         type: 'FILTER_BY_TYPE',
-        payload
+        payload,
     }
 };
 
 export function filterPokemonsCreated(payload){
     return {
         type: 'FILTER_BY_CREATED',
-        payload
+        payload,
     }
 };
 
 export function orderByName(payload){
     return {
         type: 'ORDER_BY_NAME',
-        payload
+        payload,
     }
 };
 

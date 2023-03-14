@@ -7,16 +7,15 @@ import NavBar from "../../components/NavBar/NavBar"
 import Card from "../../components/Card/Card"
 import Paginated from '../../components/Paginated/Paginated';
 import styles from "./Home.module.css"
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 
 export default function Home() {
-
-
     const dispatch = useDispatch()
     const allPokemons = useSelector((state) => state.pokemons)
     const [orden, setOrden ] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
-    const [pokemonsPerPage, setPokemonsPerPage] = useState(12)
+    const [pokemonsPerPage] = useState(12)
     const indexOfLastPokemon = currentPage * pokemonsPerPage // 12
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage // 0
     const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon)
@@ -54,6 +53,7 @@ export default function Home() {
             <NavBar />
             <div className={styles.main_cointainer}>
                 <button onClick={e => {handleClick(e)}} className={styles.reload_button}>Reload Pokemons</button>
+                <SearchBar />
                 <div className={styles.main_cointainer}>
                     <div className={styles.filters_container}>
                         <div className={styles.content_select}>
@@ -66,7 +66,7 @@ export default function Home() {
                         </div>
                         <div className={styles.content_select}>
                             <select onChange={handleFilterType}>
-                                <option value="all"> All </option>
+                                <option value="all"> Type </option>
                                 <option value="normal"> Normal </option>
                                 <option value="flying"> Flying </option>
                                 <option value="poison"> Poison </option>

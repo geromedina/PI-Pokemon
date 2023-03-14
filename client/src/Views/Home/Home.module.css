@@ -29,6 +29,7 @@
     cursor:pointer;
     color:#ffffff; 
     padding:4px 10px;
+    margin-bottom: 20px;
 }
 
 .reload_button:hover {
