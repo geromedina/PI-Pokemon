@@ -13,19 +13,14 @@ function Card({ name, types, attack, image}) {
             <img src={image} alt="imagen" className={styles.card_img}/>
         </div>
 
-        <div className={styles.card_container_types}>
-            {
-              <span className={styles.types_name}>
-            {
-              typeof types[0] === 'string' ? types[0].charAt(0).toUpperCase() + types[0].slice(1) : types[0]?.name.charAt(0).toUpperCase() +
-              types[0].name.slice(1)}   
-            { 
-                typeof types[1] === 'string' ? " - " + types[1]   :  types[1]?.name
-            }            
-              </span>
-            }
-        </div>
-
+        <ul className={styles.card_container_types}>
+          {
+            types && types.map((type, index) => {
+              return <li className={styles.types_name} key={index}>{type.name.charAt(0).toUpperCase() + type.name.slice(1)}</li>
+            })
+          }
+        </ul>
+        
         <div className={styles.card_container_types}>
             <span className={styles.text_attack}>Attack: {attack}</span>
         </div>

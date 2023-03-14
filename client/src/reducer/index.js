@@ -3,11 +3,14 @@ const initialState = {
     allPokemons: [],
     types : [],
     detail: [],
+    filters: [],
 }
 
 
 
 function rootReducer (state = initialState, action) {
+
+
     switch(action.type) {
         case 'GET_POKEMONS':{
             return {
@@ -23,23 +26,24 @@ function rootReducer (state = initialState, action) {
             }
         }
         case "FILTER_BY_TYPE": {
-            const allPokemons = state.allPokemons
-            const typeFiltered = action.payload === 'type'
+            const allPokemons = state.allPokemons;
+            const typesFiltered = action.payload === "all"
                 ? allPokemons 
-                : allPokemons.filter(el => el.types.includes(action.payload))
+                : allPokemons.filter((el) => el.types.includes(action.payload));
             return {
                 ...state,
-                pokemons: typeFiltered,
+                pokemons: typesFiltered,
+                filters: typesFiltered,
             } 
         }
         case "FILTER_BY_CREATED": {
             const allPokemons = state.allPokemons
-            const createdFilter = action.payload === "Creados"
+            const createdFilter = action.payload === "created"
             ? allPokemons.filter((el) => el.createdInDb)
             : allPokemons.filter((el) => !el.createdInDb)
             return {
                 ...state,
-                pokemons: action.payload === "Todos" 
+                pokemons: action.payload === "all" 
                 ? state.allPokemons
                 : createdFilter
             }

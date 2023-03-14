@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { filterPokemonsByType, filterPokemonsCreated, getPokemons, orderByName } from '../../actions';
+import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar"
 import Card from "../../components/Card/Card"
 import Paginated from '../../components/Paginated/Paginated';
@@ -23,7 +24,6 @@ export default function Home() {
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
-
 
     useEffect(() => {
         dispatch(getPokemons());
@@ -58,15 +58,15 @@ export default function Home() {
                     <div className={styles.filters_container}>
                         <div className={styles.content_select}>
                             <select onChange={handleSort}>
-                                <option value="filtro"> A-Z:</option>
-                                <option value="asc">Ascending</option>
-                                <option value="desc">Descending</option>
+                                <option value="filtro"> A-Z: </option>
+                                <option value="asc"> Ascending </option>
+                                <option value="desc"> Descending </option>
                             </select>
                             <i></i>
                         </div>
                         <div className={styles.content_select}>
                             <select onChange={handleFilterType}>
-                                <option value="type"> Types </option>
+                                <option value="all"> All </option>
                                 <option value="normal"> Normal </option>
                                 <option value="flying"> Flying </option>
                                 <option value="poison"> Poison </option>
@@ -82,9 +82,9 @@ export default function Home() {
                         </div>
                         <div className={styles.content_select}>
                             <select onChange={handleFilterCreated}>
-                                <option value="Todos"> All </option>
-                                <option value="Creados"> Created </option>
-                                <option value="Existentes"> Existent </option>
+                                <option value="all"> All </option>
+                                <option value="created"> Created </option>
+                                <option value="existent"> Existent </option>
                             </select>
                             <i></i>
                         </div>
@@ -93,12 +93,14 @@ export default function Home() {
                         {
                             allPokemons && currentPokemons.map((el) => {
                                 return (
-                                    <Card 
-                                    name={el.name}
-                                    image={el.image}
-                                    types= {el.types}
-                                    attack={el.attack}
-                                    />
+                                    <Link to={"/home/" + el.id}>
+                                        <Card 
+                                        name={el.name}
+                                        image={el.image}
+                                        types= {el.types}
+                                        attack={el.attack}
+                                        />
+                                    </Link>
                                 )
                             })
                         }

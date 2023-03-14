@@ -21,10 +21,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>  
-        <Route exact path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route exact path="/pokemons/:id" element={<Details />} />
-        <Route exact path="/pokemons" element={<PokemonCreate />} />
+        <Route exact path='/' element={<LandingPage />} />
+        <Route path='/home' element={<Home />} />
+        <Route exact path="/home/:id" element={<Details />} />
+        <Route exact path="/create" element={<PokemonCreate />} />
       </Routes>
     </BrowserRouter>
   );

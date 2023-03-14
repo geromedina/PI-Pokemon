@@ -1,71 +1,110 @@
 const { Router } = require("express");
-const getAllPokemons = require('../controllers/getPokemon')
-const { Pokemon, Type } = require('../db')
+const { getPokemonApiByName, getPokemonsDbByName, getAllPokemons, getPokemonDbById, getPokemoApiById, } = require("../controllers/getPokemon")
+const { Pokemon, Type } = require("../db")
 
 const router = Router();
 
+
 router.get('/', async (req, res, next) => {
     try {
-        let name = req.query.name
-        const pokemonsTotal = await getAllPokemons();
-
+        const { name } = req.query;
         if (name) {
-            const pokemonName = await pokemonsTotal.filter((p) => 
-            p.name.toLowerCase().includes(name.toLowerCase()));
-            pokemonName.length
-                ? res.status(200).send(pokemonName)
-                : res.status(404).send("The entered pokemon doesn't exist.")
-        } else res.status(200).send(pokemonsTotal);
-    } catch (error) {
-        next(error)
-    }
-});
+            // Primero busco en la api externa
+            let pokemonSearch = await getPokemonApiByName(name);
 
+            if(pokemonSearch.error) {
+                pokemonSearch = await getPokemonsDbByName(name);
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const id = req.params.id;
-        const pokemonsTotal = await getAllPokemons();
-        if (id) {
-            const pokemonId = pokemonsTotal.filter((p) => p.id === id);
-            pokemonId.length
-                ? res.status(200).json(pokemonId)
-                : res.status(404).send("Pokemon not found.")
+                if (!pokemonSearch) {
+                    return res.status(404).json({"message": "Pokemon not found"})
+                }
+            }
+            return res.status(200).json(pokemonSearch);
         }
-    } catch (error) {
-        next(error)
+
+        // Si no pasamos name, retorno todos los pokemons..
+        const allPokemons = await getAllPokemons();
+        return res.status(200).json(allPokemons);
+    } catch(error) {
+        next(error);
     }
 });
 
 
-router.post('/', async (req,res,next) => {
+router.get('/:idPokemon', async (req, res, next) => {
     try {
-        const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
-        const newPokemon = await Pokemon.create({
-            name,
-            image,
-            hp,
-            attack,
-            defense,
-            speed,
-            height,
-            weight,
+        const { idPokemon } = req.params;
+
+        if (idPokemon) {
+            let pokemonSearch = null;
+
+            if (isNaN(idPokemon)){
+                pokemonSearch = await getPokemonDbById(idPokemon);
+            } else {
+                pokemonSearch = await getPokemoApiById(idPokemon);
+            }
+
+            if(pokemonSearch) {
+                return res.status(200).json(pokemonSearch);
+            }
+        }
+
+        return res.status(404).json({"message": "Pokemon ID not found."})
+    } catch(error) {
+        next(error);
+    }
+});
+
+
+router.post('/', async (req, res, next) => {
+    const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
+
+    if (!name || !image) {
+        return res.status(404).json({error : "Name and img are requerid fields."})
+    }
+
+    let pokemonSearch = await getPokemonApiByName(name);
+
+    if (pokemonSearch.error) {
+        pokemonSearch = await getPokemonsDbByName(name);
+    }
+
+    if (pokemonSearch) {
+        return res.status(400).json({error : "Pokemon name already existing."})
+    }
+
+    try {
+        const newPokemon = await Pokemon.create(req.body);
+
+        if (newPokemon && types && Array.isArray(types)) {
+            const promisesTypes = types.map(async (t) => {
+                let type = await Type.findAll({
+                    where: { name : t.name }
+                })
+
+                return newPokemon.setTypes(type); // Realiza la asocioacion como obj..
+            })
+
+            await Promise.all(promisesTypes);
+        }
+
+        let resultPokemon = await Pokemon.findAll({
+            where: {
+                name: name
+            },
+            include: [{
+                model: Type,
+                attributes: ['id', 'name']
+            }]
         });
 
-        if (!name) return res.json({ info : "Name is required."})
+        return res.status(201).json(resultPokemon[0])
 
-        if (Array.isArray(types) && types.length) {
-            const dbTypes = await Promise.all(
-                types.map((t) => {
-                    return Type.findOne({where: { name: t}})
-                })
-            )
-            await newPokemon.setTypes(dbTypes)
-            return res.send("Pokemon successfully created.")
-        }
+
     } catch (error) {
-        res.status(400).send("Data error.")
+        next(error);
     }
-})
+});
+
 
 module.exports = router;

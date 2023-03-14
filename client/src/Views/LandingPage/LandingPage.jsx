@@ -1,16 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import styles from './LandingPage.module.css'
 
 export default function LandingPage() {
 
-//    const dispatch = useDispatch;
-
-//    useEffect(() => {
-//         dispatch(loadingPokemonsSet(true));
-//    },[])
-    
     return(
         <div className={styles.landing}>
             <div>
