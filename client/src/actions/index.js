@@ -48,9 +48,8 @@ export function getNamePokemons(name){
             return dispatch( {
                 type: 'GET_NAME_POKEMONS',
                 payload: json.data
-            })
-        }   
-        catch {
+            });
+        } catch {
             return alert("Pokemon not found");
         }
     }

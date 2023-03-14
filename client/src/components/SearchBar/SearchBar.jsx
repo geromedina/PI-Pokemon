@@ -6,13 +6,12 @@ import styles from "./SearchBar.module.css"
 
 function SearchBar() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [name, setName] = useState('')
 
     function handleInputChange(e){
         e.preventDefault()
-        setName(e.target.value)
-        console.log(name)
+        setName(e.target.value);
     }
 
     function handleSubmit(e){

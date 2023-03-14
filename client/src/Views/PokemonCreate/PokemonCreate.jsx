@@ -25,9 +25,6 @@ function validate(input){
         errors.attack = 'Attack is required';
     }
 
-    if (input.types.length <= 0) {
-        errors.types = 'At least one type is required';
-    }
     return errors;
 }
 
@@ -131,6 +128,9 @@ export default function PokemonCreate(){
                         value={pokemon.image}
                         className="input"
                         />{" "}
+                        {
+                            errors.image && ( <p className="error">{errors.image}</p> )
+                        }
                     </div>
 
                     <div>
@@ -143,6 +143,9 @@ export default function PokemonCreate(){
                         value={pokemon.hp}
                         className="input"
                         />{" "}
+                        {
+                            errors.hp && ( <p className="error">{errors.hp}</p> )
+                        }
                     </div>    
 
                     <div>
@@ -154,6 +157,9 @@ export default function PokemonCreate(){
                         value={pokemon.attack}
                         className="input"
                         /> {" "}
+                        {
+                            errors.attack && ( <p className="error">{errors.attack}</p> )
+                        }
                     </div>
 
                     <div>
