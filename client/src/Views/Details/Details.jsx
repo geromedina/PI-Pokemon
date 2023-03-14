@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { useEffect } from 'react';
 import { getDetail } from '../../actions';
 import NavBar from '../../components/NavBar/NavBar';
+import { Link } from 'react-router-dom';
 import styles from "./Details.module.css"
 
 export default function Detail(props){
@@ -48,8 +49,10 @@ export default function Detail(props){
               }
             </ul>
           </div>
-
         </div>
+        <Link to='/home'>
+          <button className={styles.back_button}>Back home</button>
+        </Link>
       </div>
     </div>
   )

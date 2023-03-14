@@ -1,6 +1,7 @@
 .main_container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     padding-top: 17vh;
 }
@@ -109,4 +110,23 @@
     border-radius: 5px; 
     height: 15px;   
     
+}
+
+.back_button {
+    font-family: "vt323", monospace;
+    font-size: 1.4rem;
+    font-weight:bold;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #cc9f52;
+  
+    box-shadow:inset 0px 1px 0px 0px #fce2c1;
+    background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+    background-color:#ffc477;
+    border-radius:6px;
+    border:1px solid #eeb44f;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff; 
+    padding:10px 14px;
+    margin-bottom: 20px;
 }
