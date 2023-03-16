@@ -113,7 +113,7 @@ export default function PokemonCreate(){
                         type="text"
                         value={pokemon.name}
                         className='input'
-                        />{" "}
+                        />
                         {
                             errors.name && ( <p className="error">{errors.name}</p> )
                         }
@@ -127,14 +127,13 @@ export default function PokemonCreate(){
                         type="text"
                         value={pokemon.image}
                         className="input"
-                        />{" "}
+                        />
                         {
                             errors.image && ( <p className="error">{errors.image}</p> )
                         }
                     </div>
 
                     <div>
-                        {" "}
                         <label htmlFor="">HP: </label>
                         <input 
                         onChange={handleChange} 
@@ -142,7 +141,7 @@ export default function PokemonCreate(){
                         type="number"
                         value={pokemon.hp}
                         className="input"
-                        />{" "}
+                        />
                         {
                             errors.hp && ( <p className="error">{errors.hp}</p> )
                         }
@@ -156,7 +155,7 @@ export default function PokemonCreate(){
                         type="number"
                         value={pokemon.attack}
                         className="input"
-                        /> {" "}
+                        />
                         {
                             errors.attack && ( <p className="error">{errors.attack}</p> )
                         }
@@ -170,7 +169,7 @@ export default function PokemonCreate(){
                         type="number"
                         value={pokemon.defense}
                         className="input"
-                        /> {" "}
+                        />
                     </div>
 
                     <div>
@@ -181,11 +180,10 @@ export default function PokemonCreate(){
                         type="number"
                         value={pokemon.speed}
                         className="input"
-                        /> {" "}
+                        />
                     </div>   
 
                     <div>
-                        {" "}
                         <label htmlFor="">Height: </label>
                         <input 
                         onChange={handleChange} 
@@ -193,7 +191,7 @@ export default function PokemonCreate(){
                         type="number"
                         value={pokemon.height}
                         className="input"
-                        /> {" "}
+                        />
                     </div>
 
                     <div>
@@ -204,7 +202,7 @@ export default function PokemonCreate(){
                         type="number"
                         value={pokemon.weight}
                         className="input"
-                        /> {" "}
+                        />
                     </div>
 
                     <div>

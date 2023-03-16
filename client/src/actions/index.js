@@ -10,6 +10,7 @@ export function getPokemons(){
     }
 };
 
+
 export function getTypes(){
     return async function(dispatch){
         const json = await axios.get("http://localhost:3001/types");
@@ -77,3 +78,19 @@ export function postPokemon(payload){
     }
 }
 
+
+
+
+// Primera funcion con promise
+
+// export function getPokemons(){
+//     return function(dispatch){
+//         axios.get('http://localhost:3001/pokemons')
+//             .then(res => {
+//                 dispatch({
+//                     type: 'GET_POKEMONS',
+//                     payload: res.data
+//                 })
+//             })
+//     }
+// }

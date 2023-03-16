@@ -52,7 +52,7 @@ router.get('/:idPokemon', async (req, res, next) => {
 });
 
 
-router.post('/', async(req, res, next) => {
+router.post('/', async(req, res) => {
     try {
         let { name, image, hp, attack, defense, speed, height, weight, types } = req.body 
 
