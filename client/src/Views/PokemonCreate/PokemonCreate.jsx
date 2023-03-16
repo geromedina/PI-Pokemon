@@ -105,7 +105,7 @@ export default function PokemonCreate(){
                     <h3 className={styles.form_title}>Create your pokemon!</h3>
 
                     <div>
-                        <label for="name">Name: </label>
+                        <label for="name">Name:</label>
                         <input 
                         onChange={handleChange}
                         id="name"
@@ -120,7 +120,7 @@ export default function PokemonCreate(){
                     </div>
 
                     <div>
-                        <label htmlFor="">Image: </label>
+                        <label htmlFor="">Image:</label>
                         <input 
                         onChange={handleChange} 
                         name="image"

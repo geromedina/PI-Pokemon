@@ -52,55 +52,38 @@ router.get('/:idPokemon', async (req, res, next) => {
 });
 
 
-router.post('/', async (req, res, next) => {
-    const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
-
-    if (!name || !image) {
-        return res.status(404).json({error : "Name and img are requerid fields."})
-    }
-
-    let pokemonSearch = await getPokemonApiByName(name);
-
-    if (pokemonSearch.error) {
-        pokemonSearch = await getPokemonsDbByName(name);
-    }
-
-    if (pokemonSearch) {
-        return res.status(400).json({error : "Pokemon name already existing."})
-    }
-
+router.post('/', async(req, res, next) => {
     try {
-        const newPokemon = await Pokemon.create(req.body);
+        let { name, image, hp, attack, defense, speed, height, weight, types } = req.body 
 
-        if (newPokemon && types && Array.isArray(types)) {
-            const promisesTypes = types.map(async (t) => {
-                let type = await Type.findAll({
-                    where: { name : t.name }
-                })
-
-                return newPokemon.setTypes(type); // Realiza la asocioacion como obj..
-            })
-
-            await Promise.all(promisesTypes);
-        }
-
-        let resultPokemon = await Pokemon.findAll({
-            where: {
-                name: name
-            },
-            include: [{
-                model: Type,
-                attributes: ['id', 'name']
-            }]
+        const newPokemon = await Pokemon.create({
+            name,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
         });
 
-        return res.status(201).json(resultPokemon[0])
+        if (!name || !image) return res.json({info: 'The name and image are required'});
 
+        if(Array.isArray(types) && types.length) {
+            let dbTypes = await Promise.all(
+                types.map((e) => {
+                    return Type.findOne({where: {name: e}})
+                })
+            )
+            
+            await newPokemon.setTypes(dbTypes)
 
-    } catch (error) {
-        next(error);
+            return res.send("Pokemon successfully created")
+        } 
+    } catch(error) {
+        res.status(400).send("Data error.")
     }
-});
+})
 
 
 module.exports = router;
