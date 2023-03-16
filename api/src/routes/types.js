@@ -4,10 +4,12 @@ const { Type } = require('../db');
 
 
 const router = Router();
-
+// Para que no salte que no la utilizo
+// (req_, res, next)
+// (_, res, next)
 router.get('/', async (_, res, next) => {
     try {
-        const api = await axios.get("https://pokeapi.co/api/v2/type"); 
+        const api = await axios.get('https://pokeapi.co/api/v2/type'); 
         const types = await api.data // Guardo en types la respuesta que esta dentro del array data
         for (t of types.results) { // Itero cada elemento dentro del array results
             const find = await Type.findOne({ where: {name: t.name}}); // Busco en la BD si existe el tipo

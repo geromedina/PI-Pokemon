@@ -14,6 +14,7 @@ export default function Home() {
     const dispatch = useDispatch()
     const allPokemons = useSelector((state) => state.pokemons)
     const [currentPage, setCurrentPage] = useState(1)
+    const [orden, setOrden] = useState('')
     const [pokemonsPerPage] = useState(12)
     const indexOfLastPokemon = currentPage * pokemonsPerPage // 12
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage // 0
@@ -44,6 +45,7 @@ export default function Home() {
         e.preventDefault();
         dispatch(orderByName(e.target.value))
         setCurrentPage(1);
+        setOrden(`Ordenado ${e.target.value}`)
     }
 
     return (

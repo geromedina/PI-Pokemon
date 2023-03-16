@@ -8,8 +8,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react'
 import { getPokemons, getTypes } from './actions';
 
-
-
 function App() {
   
   const dispatch = useDispatch();
