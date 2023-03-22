@@ -12,6 +12,10 @@ function validate(input){
     if (!input.name) {
         errors.name = 'Name is required.';
     } 
+
+    if (input.name.length > 20) {
+        errors.name = 'Name is too long.'
+    }
     
     if (!input.image) {
         errors.image = 'Image is required';
